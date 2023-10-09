@@ -1,0 +1,42 @@
+% include this file in your preamble to use these handy functions!
+
+\ExplSyntaxOn
+\newcommand{\rounddown}[1]
+{\fp_eval:n { trunc(#1,0) } }
+% always use a simple value first (default 0)
+\newcommand{\summe}[2]
+{\int_eval:n { #1 + #2 } }
+% always use a simple value first (default 1) 
+\newcommand{\produkt}[2]
+{\int_eval:n { #1 * #2 } }
+\newcommand{\fix}[1]
+{\int_eval:n {#1} }
+\ExplSyntaxOff
+
+\newcommand{\mod}[1]
+{%
+    \ifnum0<#1%
+        +#1%
+    \else%
+        #1%
+    \fi%
+}
+\newcommand{\rawattrmod}[1]
+{\rounddown{(#1-10)/2}}
+\newcommand{\attrmod}[1]
+{\mod{\rawattrmod{#1}}}
+
+\newrgbcolor{testblack}{0 0 0}
+%\newrgbcolor{testwhite}{255 255 255}
+% test for the color set in the proficiency radio buttons 
+\newcommand{\ifproficientelse}[3]
+{%
+    \extractcolorspec{#1}{\test}%
+    \extractcolorspec{testblack}{\fulfilled}%
+    \ifx\test\fulfilled
+        #2%
+    \else
+        #3%
+    \fi
+}
+\newcommand{\istrue}{DEPRICATED} %to switch out old usage
