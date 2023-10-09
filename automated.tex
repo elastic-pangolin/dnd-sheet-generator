@@ -1,0 +1,98 @@
+% =============AUTOMATED=============
+\Proficiency{\mod{\ProficiencyBonus}} % display value
+% Ability modifiers - display values
+\StrengthModifier{ \attrmod{\StrengthScoreValue} }
+\DexterityModifier{ \attrmod{\DexterityScoreValue} }
+\ConstitutionModifier{ \attrmod{\ConstitutionScoreValue} }
+\IntelligenceModifier{ \attrmod{\IntelligenceScoreValue} }
+\WisdomModifier{ \attrmod{\WisdomScoreValue} }
+\CharismaModifier{ \attrmod{\CharismaScoreValue} }
+% ability bonus/malus - raw 
+\def\StrMod{ \rawattrmod{\StrengthScoreValue} }
+\def\DexMod{ \rawattrmod{\DexterityScoreValue} }
+\def\ConMod{ \rawattrmod{\ConstitutionScoreValue} }
+\def\IntMod{ \rawattrmod{\IntelligenceScoreValue} }
+\def\WisMod{ \rawattrmod{\WisdomScoreValue} }
+\def\ChaMod{ \rawattrmod{\CharismaScoreValue} }
+% passive Perception
+\Perception{ \summe{10}{\WisMod} } %TODO: add proficiency too?
+%HP
+\MaxHitDice{\Level{}d\LvlOneHP}
+\MaxHitPoints{%(base+CON)+(Lvl-1)*(rounddown(base)+1+CON)
+\summe{ \summe{\LvlOneHP}{\ConMod} }{ \produkt{\summe{\Level}{-1}}{\summe{1}{ \summe{\ConMod}{ \rounddown{\LvlOneHP / 2} } }} }%
+}
+% Values Saving Throws
+\StrengthSavingThrowModifier{%
+\ifproficientelse{strengthproficiency}{ \mod{\summe{\ProficiencyBonus}{\StrMod}} }{ \mod{\fix{\StrMod}} }%
+}
+\DexteritySavingThrowModifier{%
+\ifproficientelse{dexterityproficiency}{ \mod{\summe{\ProficiencyBonus}{\DexMod}} }{ \mod{\fix{\DexMod}} }%
+}
+\ConstitutionSavingThrowModifier{%
+\ifproficientelse{constitutionproficiency}{ \mod{\summe{\ProficiencyBonus}{\ConMod}} }{ \mod{\fix{\ConMod}} }%
+}
+\IntelligenceSavingThrowModifier{%
+\ifproficientelse{intelligenceproficiency}{ \mod{\summe{\ProficiencyBonus}{\IntMod}} }{ \mod{\fix{\IntMod}} }%
+}
+\WisdomSavingThrowModifier{%
+\ifproficientelse{wisdomproficiency}{ \mod{\summe{\ProficiencyBonus}{\WisMod}} }{ \mod{\fix{\WisMod}} }%
+}
+\CharismaSavingThrowModifier{%
+\ifproficientelse{charismaproficiency}{ \mod{\summe{\ProficiencyBonus}{\ChaMod}} }{ \mod{\fix{\ChaMod}} }%
+}
+% Skills
+\AcrobaticsSkillModifier{%
+\ifproficientelse{acrobaticsproficiency}{ \mod{\summe{\ProficiencyBonus}{\DexMod}} }{ \mod{\fix{\DexMod}} }%
+}
+\AnimalHandlingSkillModifier{%
+\ifproficientelse{animalhandlingproficiency}{ \mod{\summe{\ProficiencyBonus}{\WisMod}} }{ \mod{\fix{\WisMod}} }%
+}
+\ArcanaSkillModifier{%
+\ifproficientelse{arcanaproficiency}{ \mod{\summe{\ProficiencyBonus}{\IntMod}} }{ \mod{\fix{\IntMod}} }%
+}
+\AthleticsSkillModifier{%\StrMod
+\ifproficientelse{athleticsproficiency}{ \mod{\summe{\ProficiencyBonus}{\StrMod}} }{ \mod{\fix{\StrMod}} }%
+}
+\DeceptionSkillModifier{%\ChaMod
+\ifproficientelse{deceptionproficiency}{ \mod{\summe{\ProficiencyBonus}{\ChaMod}} }{ \mod{\fix{\ChaMod}} }%
+}
+\HistorySkillModifier{%
+\ifproficientelse{historyproficiency}{ \mod{\summe{\ProficiencyBonus}{\IntMod}} }{ \mod{\fix{\IntMod}} }%
+}
+\InsightSkillModifier{%
+\ifproficientelse{insightproficiency}{ \mod{\summe{\ProficiencyBonus}{\WisMod}} }{ \mod{\fix{\WisMod}} }%
+}
+\IntimidationSkillModifier{%\ChaMod}
+\ifproficientelse{intimidationproficiency}{ \mod{\summe{\ProficiencyBonus}{\ChaMod}} }{ \mod{\fix{\ChaMod}} }%
+}
+\InvestigationSkillModifier{%\IntMod}
+\ifproficientelse{investigationproficiency}{ \mod{\summe{\ProficiencyBonus}{\IntMod}} }{ \mod{\fix{\IntMod}} }%
+}
+\MedicineSkillModifier{
+\ifproficientelse{medicineproficiency}{ \mod{\summe{\ProficiencyBonus}{\WisMod}} }{ \mod{\fix{\WisMod}} }%
+}
+\NatureSkillModifier{%\IntMod}
+\ifproficientelse{natureproficiency}{ \mod{\summe{\ProficiencyBonus}{\IntMod}} }{ \mod{\fix{\IntMod}} }%
+}
+\PerceptionSkillModifier{%\WisMod}
+\ifproficientelse{perceptionproficiency}{ \mod{\summe{\ProficiencyBonus}{\WisMod}} }{ \mod{\fix{\WisMod}} }%
+}
+\PerformanceSkillModifier{%
+\ifproficientelse{performanceproficiency}{ \mod{\summe{\ProficiencyBonus}{\ChaMod}} }{ \mod{\fix{\ChaMod}} }%
+}
+\PersuasionSkillModifier{%
+\ifproficientelse{persuationproficiency}{ \mod{\summe{\ProficiencyBonus}{\ChaMod}} }{ \mod{\fix{\ChaMod}} }%
+}
+\ReligionSkillModifier{%
+\ifproficientelse{religionproficiency}{ \mod{\summe{\ProficiencyBonus}{\IntMod}} }{ \mod{\fix{\IntMod}} }%
+}
+\SleightOfHandSkillModifier{%\DexMod
+\ifproficientelse{sleightofhandproficiency}{ \mod{\summe{\ProficiencyBonus}{\DexMod}} }{ \mod{\fix{\DexMod}} }%
+}
+\StealthSkillModifier{%\DexMod
+\ifproficientelse{stealthproficiency}{ \mod{\summe{\ProficiencyBonus}{\DexMod}} }{ \mod{\fix{\DexMod}} }%
+}
+\SurvivalSkillModifier{%\WisMod
+\ifproficientelse{survivalproficiency}{ \mod{\summe{\ProficiencyBonus}{\WisMod}} }{ \mod{\fix{\WisMod}} }%
+}
+

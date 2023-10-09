@@ -1,0 +1,199 @@
+\documentclass[letterpaper,openany,oneside,twocolumn]{book}
+
+\usepackage{fontspec}
+\usepackage[justified,layout=true]{dnd}
+\usepackage{ifthen}
+\usepackage{pstricks}
+\usepackage{xstring}
+
+\usepackage{xparse, siunitx} %for math
+
+\usepackage[UKenglish]{babel}
+
+\usepackage{dndtemplate}
+\input{util.tex}
+
+% =============PLEASE ENTER DATA HERE=============
+\CharacterName{Ood}
+\def\Level{5} % will be used later
+\Class{Druid \Level}
+
+\Background{\small{Outlander (Guide)}}
+\PlayerName{Hedwig}
+\Race{Tortle}
+\Alignment{LN}
+\XP{-}
+
+% =============Ability scores=====================
+\StrengthScore{16}
+\DexterityScore{8}
+\ConstitutionScore{16}
+\IntelligenceScore{8}
+\WisdomScore{17}
+\CharismaScore{10}
+% =============Other Key Stats====================
+%\MaxHitDice{5d8}
+\def\LvlOneHP{8}%one full hit die
+\Speed{30ft}
+\def\ProficiencyBonus{3} %enter just the integer
+\Initiative{ \mod{ \summe{0}{\DexMod} } } %enter Bonus here
+\ArmorClass{17}
+% =============Proficiencies: Saving Throws=============
+%\StrengthProficiency{False}
+\DexterityProficiency{False}
+\ConstitutionProficiency{False}
+\IntelligenceProficiency{True} % class
+\WisdomProficiency{True} % class
+\CharismaProficiency{False}
+% =============Proficiencies: Skills=============
+\AcrobaticsProficiency{}
+\AnimalHandlingProficiency{}
+\ArcanaProficiency{}
+\AthleticsProficiency{True}
+\DeceptionProficiency{}
+\HistoryProficiency{}
+\InsightProficiency{True}
+\IntimidationProficiency{}
+\InvestigationProficiency{}
+\MedicineProficiency{}
+\NatureProficiency{True}
+\PerceptionProficiency{}
+\PerformanceProficiency{}
+\PersuasionProficiency{}
+\ReligionProficiency{}
+\SleightOfHandProficiency{}
+\StealthProficiency{}
+\SurvivalProficiency{True}
+% =============ATTACKS=============
+\AddWeapon{Claws}{+6?}{1d4+3 / s}
+%\AddWeapon{magic Quarterstaff}{+7}{1d6+4 / b}
+%\AddWeapon{magic Quarterstaff(2h)}{+7}{1d8+4 / b}
+\AddWeapon{Gulthias Staff}{+7}{1d6+3 / b}
+\AddWeapon{Gulthias Staff(2h)}{+7}{1d8+3 / b}
+\AddWeapon{Sickle}{+6}{1d4+3 / s}
+% =============Proficiencies: other=============
+\OtherProficienciesLanguages{
+\textbf{Languages:} Common, Druidic, Aquan, Halfling\\
+\textbf{Armor:} light, medium, shields (druids will not wear armor or use shields made of metal)\\
+\textbf{Weapons:} clubs, daggers, darts, javelins, maces, quarterstaffs, scimitars, sickles, slings, spears\\
+\textbf{Tools:} herbalism kit, musical instrument (pan flute)
+}
+
+\FeaturesTraits{
+\newline
+\textbf{[BG Outlander] Wanderer} Recall terrain, find food and water for 6 people\\
+\textbf{[Tortle] Hold breath 1h}\\
+\textbf{[Tortle] Shell defense}\\
+\textbf{Wildshape 2x CR 1/2}\\
+\textbf{[Circle: Wildfire] Summon wildfire spirit}: 30ft range unoccupied space you can see, 1h duration, other creatures in 10ft Dex spell DC: 2d6 fire/neg; command with bonus action\\
+\textbf{[C] Wildfire Spirit's Flame Seed}: ranged weapon attack; spell attck mod to hit; range 60ft; target the master can see; 1d6+PB fire dmg\\
+\textbf{[C] Wildfire Spirit's Fiery Teleport}: spirit and each willing creature of your
+choice within 5ft of it teleport up to 15ft to unoccupied spaces you can see. Then each creature within 5ft of the space the spirit left Dex spell DC: 1d6+PB fire/neg \\
+\textbf{[W] Vampiric Strike}: strike w. \emph{Gulthias Staff} and expend 1 change, regain dmg dealt as hitpoints; Wis DC 12 save/wielder is afflicted by madness. Has 10 charges and regains 1d6 + 4 daily at dusk.\\
+\textbf{[W] Blight Bane}: while attuned to \emph{Gulthias Staff}, evil plant creatures do not attack you unless attacked
+}
+% =============Appearance=============
+\Age{28}
+\Height{5ft (152cm)}
+\Weight{450 pd}
+\Eyes{green}
+\Skin{dark grey}
+\Hair{-}
+\CharacterAppearance{\includegraphics[scale=1.35]{img/ood-tmp}}
+% =============Background=============
+\AdditionalFeaturesAndTraits{}
+\Characterbackground{\footnotesize\vspace{0.5cm}
+Enter your background story etc. here}
+\PersonalityTraits{ I'm driven by a wanderlust that led me away from home. }
+\Ideals{ Nature. The natural world is more important than all the constructs of civilization. }
+\Bonds{ I suffer awful visions of a coming disaster and will do anything to prevent it. }
+\Flaws{ I remember every insult I've received and nurse a silent resentment toward anyone who's ever wronged me. }
+
+% =============Magic=============
+\SpellcastingClass{Druid}
+\SpellcastingAbility{WIS}
+
+\CantripSlotA{Guidance [V S] 1A}
+\CantripSlotB{Produce Flame [V S] 1A}
+\CantripSlotC{Create Bonfire (Xan) [todo] 1A}
+
+\FirstLevelSpellSlotsTotal{4 \footnotesize(4/8)} %prep Lvl+WIS
+\FirstLevelSpellSlotA{Goodberry}
+\FirstLevelSpellSlotB{Entangle}
+\FirstLevelSpellSlotC{Healing Word}
+\FirstLevelSpellSlotD{Speak with Animals}
+\FirstLevelSpellSlotE{[C] Burning Hands}
+\FirstLevelSpellSlotF{[C] Cure Wounds}
+
+\SecondLevelSpellSlotsTotal{3 \footnotesize(2/8)} %prep Lvl+WIS
+%\SecondLevelSpellSlotA{Spike Growth}
+\SecondLevelSpellSlotA{Moonbeam}
+%\SecondLevelSpellSlotB{Enhance Ability}
+\SecondLevelSpellSlotB{Lesser Restoration}
+\SecondLevelSpellSlotC{[C] Flaming Sphere}
+\SecondLevelSpellSlotD{[C] Scorching Ray}
+
+\ThirdLevelSpellSlotsTotal{2 \footnotesize(2/8)}
+\ThirdLevelSpellSlotA{Elemental Weapon}
+\ThirdLevelSpellSlotB{Speak with Plants}
+\ThirdLevelSpellSlotC{[C] Plant Growth}
+\ThirdLevelSpellSlotD{[C] Revivify}
+
+\FourthLevelSpellSlotsTotal{-}
+\FourthLevelSpellSlotA{}
+
+\FifthLevelSpellSlotsTotal{-}
+\FifthLevelSpellSlotA{}
+
+\SixthLevelSpellSlotsTotal{-}
+\SixthLevelSpellSlotA{}
+
+% =============CURRENTLY UNUSED=============
+\AttacksAdditional{
+%\textbf{Arcane Focus:}\\A glass orb filled with moving smoke, known as Dagmar\\
+%\textbf{Stiletto Dagger:}\\Advantage on stealth checks to conceal\\
+%\textbf{Resistances:}\\Ice and Fire damage\\
+%\istrue{intelligenceproficiency} * 3 = \produkt{\istrue{intelligenceproficiency}}{3} %\produkt{3}{\istrue{intelligenceproficiency}}
+}
+
+\Treasure{}
+\AlliesAndOrganizations{}
+\OrganizationName{}
+
+\Inspiration{}
+\Equipment{}
+\CurrentHitPoints{}
+\TemporaryHitPoints{}
+\CurrentHitDice{}
+
+\CP{}
+\SP{}
+\GP{}
+\EP{}
+\PP{}
+
+\input{automated.tex}
+% =============AUTOMATED SPELL STATS=============
+\SpellSaveDC{%14} %8+WIS+Prof = 8+3+3
+\summe{\summe{8}{\WisMod}}{\ProficiencyBonus}%
+}
+\SpellAttackBonus{%+6} %Prof+WIS
+\mod{\summe{\ProficiencyBonus}{\WisMod}}%
+}
+
+%\RequirePackage{etex} %TEST
+
+\begin{document}
+\newgeometry{left=0cm,right=0cm,top=0cm,bottom=0cm}
+\onecolumn
+% CHARACTER PAGE
+\rendercharactersheet
+% BACKSTORY PAGE
+\renderbackgroundsheet
+% SPELLCASTING PAGE
+\renderspellsheet
+\footnotesize
+\include{spells_descriptions.tex}
+\normalsize
+\end{document}
+
